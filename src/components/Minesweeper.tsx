@@ -96,7 +96,7 @@ export function Minesweeper() {
     if (cell.isFlagged && !cell.isRevealed) return "📋";
     if (!cell.isRevealed) return "";
     if (cell.isMine) return "🤵";
-    if (cell.neighborCount === 0) return "㊙️";
+    if (cell.neighborCount === 0) return "";
     return cell.neighborCount.toString();
   };
 
