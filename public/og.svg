@@ -1,0 +1,20 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="btn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#f5a623"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="120" text-anchor="middle" font-family="sans-serif" font-size="64" font-weight="bold" fill="white">🔍 汚職議員を告発せよ！</text>
+  <text x="600" y="280" text-anchor="middle" font-size="120">🤵</text>
+  <text x="600" y="380" text-anchor="middle" font-family="sans-serif" font-size="40" fill="#f5a623" font-style="italic">「証拠を集めて闇を暴け」</text>
+  <text x="600" y="440" text-anchor="middle" font-family="sans-serif" font-size="32" fill="rgba(255,255,255,0.6)">闇の力に葬られるな！</text>
+  <rect x="400" y="510" width="400" height="70" rx="35" fill="url(#btn)"/>
+  <text x="600" y="555" text-anchor="middle" font-family="sans-serif" font-size="32" font-weight="bold" fill="white">🔍 今すぐ告発</text>
+</svg>
