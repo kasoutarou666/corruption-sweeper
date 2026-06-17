@@ -1,23 +1,62 @@
-This is a [Vite](https://vitejs.dev) project bootstrapped with [`@farcaster/create-mini-app`](https://github.com/farcasterxyz/miniapps/tree/main/packages/create-mini-app).
+cat > README.md << 'EOF'
 
-For documentation and guides, visit [miniapps.farcaster.xyz](https://miniapps.farcaster.xyz/docs/getting-started).
+# 🔍 汚職議員を告発せよ！/ Corruption Sweeper
 
-## `farcaster.json`
+> 証拠を集めて汚職議員を暴け！闇の力に葬られるな！
 
-The `/.well-known/farcaster.json` is served from the [public
-directory](https://vite.dev/guide/assets) and can be updated by editing
-`./public/.well-known/farcaster.json`.
+🎮 **[今すぐ告発する](https://corruption-sweeper.vercel.app)**
 
-You can also use the `public` directory to serve a static image for `splashBackgroundImageUrl`.
+---
 
-## Frame Embed
+## 🎯 ゲーム概要
 
-Add a the `fc:frame` in `index.html` to make your root app URL sharable in feeds:
+政治家モチーフのマインスイーパーゲームです。
+汚職議員（💣）を避けながら証拠を集め、全ての安全なマスを開けたら告発成功！
 
-```html
-  <head>
-    <!--- other tags --->
-    <meta name="fc:frame" content='{"version":"next","imageUrl":"https://placehold.co/900x600.png?text=Frame%20Image","button":{"title":"Open","action":{"type":"launch_frame","name":"App Name","url":"https://app.com"}}}' /> 
-  </head>
+---
+
+## 🕹️ 遊び方
+
+1. マスをタップして証拠を収集
+2. 数字は周囲の汚職議員の数を示す
+3. 「📋 告発状モード」で汚職議員の場所をマーク
+4. 全てのマスを開けたら告発成功！🎉
+5. 汚職議員を踏んだら「闇の力に葬られました」💀
+
+---
+
+## ⚠️ ゲームルール
+
+| 要素        | 説明                   |
+| ----------- | ---------------------- |
+| 🤵 汚職議員 | 踏んだらゲームオーバー |
+| 📋 告発状   | 汚職議員の場所をマーク |
+| 数字        | 周囲の汚職議員の数     |
+| 空白        | 安全な証拠エリア       |
+
+---
+
+## 🛠️ 技術スタック
+
+- **Framework**: Vite + React + TypeScript
+- **Platform**: Farcaster Mini App
+- **Deploy**: Vercel
+- **SDK**: @farcaster/frame-sdk
+
+---
+
+## 🚀 ローカル開発
+
+```bash
+git clone https://github.com/kasoutarou666/corruption-sweeper.git
+cd corruption-sweeper
+npm install
+npm run dev
 ```
 
+---
+
+## 📝 ライセンス
+
+MIT
+EOF
