@@ -1,1 +1,17 @@
-{}
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjM0NTU0MSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweGI4YjYzMjZiRjc3NzFhZDk2Zjc2OTZGQTQwMTRjZjY5YzM1QWMyZEQifQ",
+    "payload": "eyJkb21haW4iOiJjb3JydXB0aW9uLXN3ZWVwZXIudmVyY2VsLmFwcCJ9",
+    "signature": "MRDtHzxWsd0OY7u6GIj5BeQxB3cs/npnLv0h2zYonfFhxUcunw8RsH91+VxCz13dTdGrGCcoi34feaO/xm9rEhw="
+  },
+  "frame": {
+    "version": "1",
+    "name": "汚職議員を告発せよ！",
+    "iconUrl": "https://corruption-sweeper.vercel.app/og.png",
+    "homeUrl": "https://corruption-sweeper.vercel.app",
+    "imageUrl": "https://corruption-sweeper.vercel.app/og.png",
+    "buttonTitle": "🔍 今すぐ告発",
+    "splashImageUrl": "https://corruption-sweeper.vercel.app/og.png",
+    "splashBackgroundColor": "#1a1a2e"
+  }
+}
