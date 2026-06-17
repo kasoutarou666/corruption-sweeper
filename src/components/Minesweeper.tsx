@@ -202,14 +202,34 @@ export function Minesweeper() {
       )}
 
       {status === "won" && (
-        <div style={{ marginTop: "16px", padding: "16px 24px", background: "rgba(34,197,94,0.2)", borderRadius: "12px", textAlign: "center" }}>
-          <p style={{ fontSize: "1.2rem", fontWeight: "bold" }}>🎉 告発成功！</p>
-          <p style={{ fontSize: "0.8rem", opacity: 0.7 }}>汚職議員を一掃した！{time}秒でクリア！</p>
-          <button onClick={handleReset} style={{ marginTop: "8px", padding: "8px 24px", background: "linear-gradient(135deg, #22c55e, #16a34a)", border: "none", borderRadius: "50px", color: "white", cursor: "pointer", fontWeight: "bold" }}>
-            もう一度
-          </button>
-        </div>
-      )}
+  <div style={{ marginTop: "16px", padding: "16px 24px", background: "rgba(34,197,94,0.2)", borderRadius: "12px", textAlign: "center" }}>
+    <p style={{ fontSize: "1.2rem", fontWeight: "bold" }}>🎉 告発成功！</p>
+    <p style={{ fontSize: "0.8rem", opacity: 0.7 }}>汚職議員を一掃した！{time}秒でクリア！</p>
+    <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "8px" }}>
+      <button
+        onClick={() => {
+          const text = `🔍 汚職議員を告発せよ！\n${time}秒で告発成功！証拠を集めて闇を暴いたで！\nhttps://corruption-sweeper.vercel.app\n#汚職議員を告発せよ #FarcasterMiniApp`;
+          window.open(`https://warpcast.com/~/compose?text=${encodeURIComponent(text)}`, "_blank");
+        }}
+        style={{ padding: "8px 16px", background: "linear-gradient(135deg, #8b5cf6, #6d28d9)", border: "none", borderRadius: "50px", color: "white", cursor: "pointer", fontWeight: "bold", fontSize: "0.8rem" }}
+      >
+        🟣 Farcasterでシェア
+      </button>
+      <button
+        onClick={() => {
+          const text = `🔍 汚職議員を告発せよ！\n${time}秒で告発成功！\nhttps://corruption-sweeper.vercel.app\n#汚職議員を告発せよ`;
+          window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
+        }}
+        style={{ padding: "8px 16px", background: "linear-gradient(135deg, #000, #333)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "50px", color: "white", cursor: "pointer", fontWeight: "bold", fontSize: "0.8rem" }}
+      >
+        𝕏 でシェア
+      </button>
+    </div>
+    <button onClick={handleReset} style={{ marginTop: "8px", padding: "8px 24px", background: "linear-gradient(135deg, #22c55e, #16a34a)", border: "none", borderRadius: "50px", color: "white", cursor: "pointer", fontWeight: "bold" }}>
+      もう一度
+    </button>
+  </div>
+)}
 
       <div style={{ marginTop: "12px", fontSize: "0.7rem", opacity: 0.4, textAlign: "center" }}>
         タップで証拠収集 | 告発状モードで汚職議員をマーク
