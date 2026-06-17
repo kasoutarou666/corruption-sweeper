@@ -10,6 +10,8 @@ import {
   checkWin,
 } from "../lib/minesweeperLogic";
 import { POLITICIANS } from "../lib/politicians";
+import { mintCorruptionNFT } from "../lib/mintNFT";
+import { useAccount, useConnect } from "wagmi";
 
 const NUMBER_COLORS: Record<number, string> = {
   1: "#3b82f6",
@@ -35,6 +37,29 @@ export function Minesweeper() {
     POLITICIANS[Math.floor(Math.random() * POLITICIANS.length)]
   );
   const [nftFlipped, setNftFlipped] = useState(false);
+  const [minting, setMinting] = useState(false);
+  const [mintTx, setMintTx] = useState<string | null>(null);
+  const [mintError, setMintError] = useState<string | null>(null);
+  const { isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+
+  const handleMint = async () => {
+    if (!isConnected) {
+      connect({ connector: connectors[0] });
+      return;
+    }
+    setMinting(true);
+    setMintError(null);
+    try {
+      const receipt = await mintCorruptionNFT(selectedPolitician.id - 1, time);
+      setMintTx(receipt.transactionHash);
+    } catch (e: unknown) {
+      setMintError("ミント失敗…もう一度試してや");
+      console.error(e);
+    } finally {
+      setMinting(false);
+    }
+  };
 
   const startTimer = () => {
     const ref = setInterval(() => setTime(t => t + 1), 1000);
@@ -55,6 +80,8 @@ export function Minesweeper() {
     setTimerRef(null);
     setShowNFT(false);
     setNftRevealed(false);
+    setMintTx(null);
+    setMintError(null);
   };
 
   const handleNFTReveal = () => {
@@ -136,22 +163,6 @@ export function Minesweeper() {
     }
     if (cell.isMine) return { ...base, background: "rgba(239,68,68,0.4)" };
     return { ...base, background: "rgba(0,0,0,0.3)" };
-  };
-
-  // NFTカードのセルスタイル
-  const getNFTCellStyle = (row: number, col: number): React.CSSProperties => {
-    const cell = board[row][col];
-    return {
-      width: "28px",
-      height: "28px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: "0.8rem",
-      border: "1px solid rgba(255,215,0,0.4)",
-      borderRadius: "3px",
-      background: cell.isMine ? "rgba(239,68,68,0.4)" : "rgba(0,0,0,0.5)",
-    };
   };
 
   return (
@@ -244,7 +255,7 @@ export function Minesweeper() {
           <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "8px" }}>
             <button
               onClick={() => {
-                const text = `🔍 汚職議員を告発せよ！\n${time}秒で告発成功！証拠を集めて闇を暴いたで！\nhttps://corruption-sweeper.vercel.app\n#汚職議員を告発せよ #FarcasterMiniApp`;
+                const text = `🔍 汚職議員を告発せよ！\n${time}秒で告発成功！\nhttps://corruption-sweeper.vercel.app\n#汚職議員を告発せよ #FarcasterMiniApp`;
                 window.open(`https://warpcast.com/~/compose?text=${encodeURIComponent(text)}`, "_blank");
               }}
               style={{ padding: "8px 16px", background: "linear-gradient(135deg, #8b5cf6, #6d28d9)", border: "none", borderRadius: "50px", color: "white", cursor: "pointer", fontWeight: "bold", fontSize: "0.8rem" }}
@@ -267,7 +278,6 @@ export function Minesweeper() {
         </div>
       )}
 
-      {/* NFTリビール */}
       {showNFT && (
         <div style={{
           marginTop: "16px",
@@ -340,9 +350,56 @@ export function Minesweeper() {
             )}
           </div>
 
-          <p style={{ fontSize: "0.7rem", opacity: 0.5, marginBottom: "12px" }}>
+          <p style={{ fontSize: "0.7rem", opacity: 0.5, marginBottom: "8px" }}>
             この告発記録はブロックチェーンに刻まれた⛓️
           </p>
+
+          {!mintTx ? (
+            <button
+              onClick={handleMint}
+              disabled={minting}
+              style={{
+                padding: "10px 20px",
+                background: minting ? "rgba(255,255,255,0.1)" : "linear-gradient(135deg, #0052ff, #0070f3)",
+                border: "none",
+                borderRadius: "50px",
+                color: "white",
+                cursor: minting ? "not-allowed" : "pointer",
+                fontWeight: "bold",
+                fontSize: "0.85rem",
+                marginBottom: "8px",
+                width: "100%",
+              }}
+            >
+              {minting ? "⏳ ミント中..." : "⛓️ BaseにNFTをMint！"}
+            </button>
+          ) : (
+            <a
+              href={"https://basescan.org/tx/" + mintTx}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                padding: "10px 20px",
+                background: "linear-gradient(135deg, #22c55e, #16a34a)",
+                borderRadius: "50px",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "0.85rem",
+                marginBottom: "8px",
+                textDecoration: "none",
+                textAlign: "center",
+              }}
+            >
+              ✅ Mint成功！Basescanで確認
+            </a>
+          )}
+
+          {mintError && (
+            <p style={{ color: "#ef4444", fontSize: "0.75rem", marginBottom: "8px" }}>
+              {mintError}
+            </p>
+          )}
 
           <div style={{ display: "flex", gap: "8px", justifyContent: "center" }}>
             <button
