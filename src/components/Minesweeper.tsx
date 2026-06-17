@@ -110,7 +110,7 @@ export function Minesweeper() {
       justifyContent: "center",
       fontSize: cell.isRevealed && !cell.isMine && cell.neighborCount > 0 ? "0.85rem" : "1rem",
       fontWeight: "bold",
-      border: "1px solid rgba(255,255,255,0.1)",
+      border: "2px solid rgba(255,255,255,0.3)",
       borderRadius: "4px",
       cursor: "pointer",
       userSelect: "none",
